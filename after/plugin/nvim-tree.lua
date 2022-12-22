@@ -8,7 +8,7 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
 
 -- empty setup using defaults
-require("nvim-tree").setup()
+-- require("nvim-tree").setup()
 
 -- OR setup with some options
 require("nvim-tree").setup({
@@ -17,7 +17,7 @@ require("nvim-tree").setup({
     adaptive_size = true,
     mappings = {
       list = {
-        { key = "u", action = "dir_up" },
+        { key = "s", action = "split" },
       },
     },
   },
