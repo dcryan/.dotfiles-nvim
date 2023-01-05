@@ -13,11 +13,11 @@ return require('packer').startup(function(use)
     requires = { { 'nvim-lua/plenary.nvim' } }
   }
 
-  use 'zbirenbaum/copilot.lua'
-  use {
-    'zbirenbaum/copilot-cmp',
-    after = "copilot.lua"
-  }
+  use "zbirenbaum/copilot.lua"
+  -- use {
+  --   'zbirenbaum/copilot-cmp',
+  --   after = "copilot.lua"
+  -- }
 
   use {
     'nvim-tree/nvim-tree.lua',
