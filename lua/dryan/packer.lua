@@ -30,7 +30,7 @@ return require('packer').startup(function(use)
 
   use "lewis6991/gitsigns.nvim"
   use 'bronson/vim-trailing-whitespace'
-  use 'dense-analysis/ale'
+  -- use 'dense-analysis/ale'
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
