@@ -33,12 +33,26 @@ return require('packer').startup(function(use)
   use 'dense-analysis/ale'
   use {
     'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+    event = 'ColorScheme',
+    config = function()
+      require('lualine').setup({
+        options = {
+          --- @usage 'rose-pine' | 'rose-pine-alt'
+          theme = 'rose-pine'
+        }
+      })
+    end
   }
   use 'lukas-reineke/indent-blankline.nvim'
 
-  -- Themes
-  use 'folke/tokyonight.nvim'
+  use({
+    'rose-pine/neovim',
+    as = 'rose-pine',
+    config = function()
+      vim.cmd.colorscheme('rose-pine')
+    end
+  })
 
   use {
     'VonHeikemen/lsp-zero.nvim',
