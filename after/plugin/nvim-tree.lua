@@ -29,5 +29,9 @@ require("nvim-tree").setup({
   },
 })
 
-vim.keymap.set('n', '<leader>n', vim.cmd.NvimTreeToggle, {noremap = true})
-vim.keymap.set('n', '<leader>m', vim.cmd.NvimTreeFindFile, {noremap = true})
+vim.keymap.set('n', '<leader>n', vim.cmd.NvimTreeToggle, { noremap = true })
+vim.keymap.set('n', '<leader>m', vim.cmd.NvimTreeFindFile, { noremap = true })
+
+-- vim.wo.foldmethod="expr"
+-- vim.o.foldexpr="nvim_treesitter#foldexpr()"
+-- vim.wo.foldenable=false -- can be enabled directly in opened file - using 'zi' - toogle fold

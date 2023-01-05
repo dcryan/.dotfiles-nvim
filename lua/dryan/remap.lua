@@ -1,30 +1,27 @@
-local Remap = require("dryan.keymap")
-local nnoremap = Remap.nnoremap
-local inoremap = Remap.inoremap
-local vnoremap = Remap.vnoremap
+local opts = {remap = false}
+
 
 
 -- Window Management
 -- Set window sizes equal
-nnoremap("<leader>=", "<cmd>wincmd =<CR>")
+vim.keymap.set("n", "<leader>=", "<cmd>wincmd =<CR>", opts)
+
 
 
 -- Hide highlighted words
-nnoremap("<leader>hh", "<cmd>nohl<CR>")
+vim.keymap.set("n", "<leader>hh", "<cmd>nohl<CR>", opts)
+
 
 
 -- Move lines:
-nnoremap("<C-j>", ":m .+1<CR>==")
-nnoremap("<C-k>", ":m .-2<CR>==")
-inoremap("<C-j>", "<Esc>:m .+1<CR>==gi")
-inoremap("<C-k>", "<Esc>:m .-2<CR>==gi")
-vnoremap("<C-j>", ":m '>+1<CR>gv=gv")
-vnoremap("<C-k>", ":m '<-2<CR>gv=gv")
+vim.keymap.set("n", "<C-j>", ":m .+1<CR>==", opts)
+vim.keymap.set("n", "<C-k>", ":m .-2<CR>==", opts)
+vim.keymap.set("i", "<C-j>", "<Esc>:m .+1<CR>==gi", opts)
+vim.keymap.set("i", "<C-k>", "<Esc>:m .-2<CR>==gi", opts)
+vim.keymap.set("v", "<C-j>", ":m '>+1<CR>gv=gv", opts)
+vim.keymap.set("v", "<C-k>", ":m '<-2<CR>gv=gv", opts)
 
 
--- -- Netrw
--- vim.g.netrw_banner = 1
--- vim.g.netrw_winsize = 15
--- vim.g.netrw_liststyle = 3
 
--- nnoremap("<leader>n", "<cmd>Lex<cr>")
+-- Save Session
+vim.keymap.set("n", "<leader>gm", function() vim.api.nvim_command('mks! session.vim') end, opts)
