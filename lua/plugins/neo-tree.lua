@@ -16,11 +16,5 @@ return {
       follow_current_file = true,
       hijack_netrw_behavior = "open_current",
     },
-    -- hide icons
-    view = {
-      icons = {
-        enable = false,
-      }
-    },
   },
 }
