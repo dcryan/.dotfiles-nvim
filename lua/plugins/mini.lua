@@ -1,21 +1,19 @@
 return {
   {
     "echasnovski/mini.indentscope",
-    config = function()
-      local indentscope = require("mini.indentscope")
-
-      local config = {
-        symbol = "▏",
-        draw = {
-          delay = 0,
-          animation = indentscope.gen_animation.none()
-        }
+    opts = {
+      symbol = "▏",
+      draw = {
+        delay = 0,
       }
-      indentscope.setup(config)
+    },
+    config = function(_, opts)
+      local indentscope = require("mini.indentscope")
+      opts.draw.animation = indentscope.gen_animation.none()
+
+      indentscope.setup(opts)
     end,
   },
-
-  -- { "echasnovski/mini.sessions" },
 
   {
     "echasnovski/mini.cursorword",
@@ -26,31 +24,45 @@ return {
 
   {
     "echasnovski/mini.surround",
-    config = function()
-      local MiniSurround = require('mini.surround')
-
-      local config = {
-        -- NOTE: Changing Keymaps to be similar to 'tpope/vim-surround'
-        -- Module mappings. Use `''` (empty string) to disable one.
-        mappings = {
-          add = 'ys', -- Add surrounding in Normal and Visual modes
-          delete = 'ds', -- Delete surrounding
-          replace = 'cs', -- Replace surrounding
-
-          find = '', -- Find surrounding (to the right)
-          find_left = '', -- Find surrounding (to the left)
-          highlight = '', -- Highlight surrounding
-          update_n_lines = '', -- Update `n_lines`
-          suffix_last = '', -- Suffix to search with "prev" method
-          suffix_next = '', -- Suffix to search with "next" method
-        }
+    opts = {
+      -- NOTE: Changing Keymaps to be similar to 'tpope/vim-surround'
+      -- Module mappings. Use `''` (empty string) to disable one.
+      mappings = {
+        add = 'ys',          -- Add surrounding in Normal and Visual modes
+        delete = 'ds',       -- Delete surrounding
+        replace = 'cs',      -- Replace surrounding
+        find = '',           -- Find surrounding (to the right)
+        find_left = '',      -- Find surrounding (to the left)
+        highlight = '',      -- Highlight surrounding
+        update_n_lines = '', -- Update `n_lines`
+        suffix_last = '',    -- Suffix to search with "prev" method
+        suffix_next = '',    -- Suffix to search with "next" method
       }
-
-      MiniSurround.setup(config)
+    },
+    config = function(_, opts)
+      require('mini.surround').setup(opts)
 
       -- Remap adding surrounding to Visual mode selection
       vim.api.nvim_del_keymap('x', 'ys')
       -- vim.api.nvim_set_keymap('x', 'S', [[:<C-u>lua MiniSurround.add('visual')<CR>]], { noremap = true })
     end,
   },
+
+  {
+    "echasnovski/mini.comment",
+    event = "VeryLazy",
+    config = function()
+      require("mini.comment").setup {
+        options = {
+          custom_commentstring = function()
+            return require('ts_context_commentstring.internal').calculate_commentstring() or vim.bo.commentstring
+          end,
+        },
+      }
+    end,
+    dependencies = {
+      "JoosepAlviste/nvim-ts-context-commentstring",
+    }
+  },
+
 }

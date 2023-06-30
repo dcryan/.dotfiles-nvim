@@ -2,29 +2,22 @@ return {
   'akinsho/bufferline.nvim',
   version = "v3.*",
   dependencies = {
-    -- 'nvim-tree/nvim-web-devicons',
+    'nvim-tree/nvim-web-devicons',
   },
+  lazy = false,
   config = {
     options = {
-      -- numbers = "ordinal",
       indicator = {
-        icon = '▎', -- this should be omitted if indicator style is not 'icon'
-        style = 'icon',
+        icon = '', -- this should be omitted if indicator style is not 'icon'
+        style = 'underline',
       },
-      buffer_close_icon = "",
-      modified_icon = "",
-      close_icon = "",
-      left_trunc_marker = "",
-      right_trunc_marker = "",
-      max_name_length = 18,
-      max_prefix_length = 15,
-      truncate_names = true,
-      tab_size = 18,
-      -- diagnostics = "nvim_lsp",
-      -- diagnostics_indicator = function(count, level, diagnostics_dict, context)
-      --   local icon = level:match("error") and " " or " "
-      --   return " " .. icon .. count
-      -- end,
+      show_buffer_close_icons = true,
+      hover = {
+        enabled = true,
+        delay = 200,
+        reveal = { 'close' }
+      },
+      separator_style = { "", "" },
       offsets = {
         {
           filetype = "neo-tree",
@@ -33,19 +26,25 @@ return {
           separator = true
         }
       },
-      show_buffer_close_icons = false,
-      show_close_icon = false,
-      show_tab_indicators = false,
-      persist_buffer_sort = true,
-      separator_style = "thin",
-      enforce_regular_tabs = false,
-      always_show_bufferline = true,
-      sort_by = "directory",
     },
   },
   keys = {
-    { "<leader>pb", "<cmd>BufferLinePick<CR>", desc = "Pick buffer" },
-    { "<leader>pc", "<cmd>BufferLinePickClose<CR>", desc = "Pick buffer and close" },
+    { "<leader>1",  "<cmd>BufferLineGoToBuffer 1<CR>",  desc = "Go to buffer 1" },
+    { "<leader>2",  "<cmd>BufferLineGoToBuffer 2<CR>",  desc = "Go to buffer 2" },
+    { "<leader>3",  "<cmd>BufferLineGoToBuffer 3<CR>",  desc = "Go to buffer 3" },
+    { "<leader>4",  "<cmd>BufferLineGoToBuffer 4<CR>",  desc = "Go to buffer 4" },
+    { "<leader>5",  "<cmd>BufferLineGoToBuffer 5<CR>",  desc = "Go to buffer 5" },
+    { "<leader>6",  "<cmd>BufferLineGoToBuffer 6<CR>",  desc = "Go to buffer 6" },
+    { "<leader>7",  "<cmd>BufferLineGoToBuffer 7<CR>",  desc = "Go to buffer 7" },
+    { "<leader>8",  "<cmd>BufferLineGoToBuffer 8<CR>",  desc = "Go to buffer 8" },
+    { "<leader>9",  "<cmd>BufferLineGoToBuffer 9<CR>",  desc = "Go to buffer 9" },
+    { "<leader>0",  "<cmd>BufferLineGoToBuffer 10<CR>", desc = "Go to buffer 10" },
+    { "<leader>bp",  "<cmd>BufferLineTogglePin<CR>",  desc = "Toggle pin" },
+    { "<leader>bn",  "<cmd>BufferLineCycleNext<CR>",    desc = "Cycle next" },
+    { "<leader>bp",  "<cmd>BufferLineCyclePrev<CR>",    desc = "Cycle prev" },
+    { "<leader>bd",  "<cmd>BufferLinePickClose<CR>",    desc = "Pick and close" },
+    { "<leader>be",  "<cmd>BufferLineSortByExtension<CR>", desc = "Sort by extension" },
+    { "<leader>bd",  "<cmd>BufferLineSortByDirectory<CR>", desc = "Sort by directory" },
+    { "<leader>bl",  "<cmd>BufferLineSortByLanguage<CR>",  desc = "Sort by language" },
   },
-  lazy = false,
 }

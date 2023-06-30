@@ -5,13 +5,12 @@ return {
   dependencies = {
     'nvim-lua/plenary.nvim',
   },
-  config = function()
-    local builtin = require('telescope.builtin')
-
-    vim.keymap.set('n', '<C-p>', builtin.find_files, { noremap = true, desc = 'Find files' })
-    vim.keymap.set('n', '<leader>f', builtin.live_grep, { noremap = true, desc = 'Find in files' })
-    vim.keymap.set('n', '<leader>F', builtin.grep_string, { noremap = true, desc = 'Find in files' })
-    vim.keymap.set('n', '<leader>b', builtin.buffers, { noremap = true, desc = 'Find buffers' })
-    vim.keymap.set('n', '<leader>gh', builtin.help_tags, { noremap = true, desc = "Search help tags" })
-  end,
+  config = {},
+  keys = {
+    { "<C-p>",      "<cmd>lua require('telescope.builtin').find_files()<CR>",  desc = "Find files" },
+    { "<leader>f",  "<cmd>lua require('telescope.builtin').live_grep()<CR>",   desc = "Find in files" },
+    { "<leader>F",  "<cmd>lua require('telescope.builtin').grep_string()<CR>", desc = "Find in files" },
+    -- { "<leader>b",  "<cmd>lua require('telescope.builtin').buffers()<CR>",     desc = "Find buffers" },
+    { "<leader>gh", "<cmd>lua require('telescope.builtin').help_tags()<CR>",   desc = "Search help tags" },
+  },
 }

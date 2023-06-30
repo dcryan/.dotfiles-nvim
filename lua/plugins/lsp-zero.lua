@@ -1,10 +1,16 @@
 return {
   'VonHeikemen/lsp-zero.nvim',
   lazy = false,
+  branch = 'v2.x',
   dependencies = {
     -- LSP Support
     'neovim/nvim-lspconfig',
-    'williamboman/mason.nvim',
+    {
+      'williamboman/mason.nvim',
+      build = function()
+        pcall(vim.cmd, 'MasonUpdate')
+      end,
+    },
     'williamboman/mason-lspconfig.nvim',
 
     -- Autocompletion
@@ -23,13 +29,28 @@ return {
     local lsp = require("lsp-zero")
     local cmp = require("cmp")
 
-    lsp.preset("recommended")
+    lsp.preset({
+      name = "recommended",
+      set_lsp_keymaps = { preserve_mappings = false },
+    })
 
     lsp.ensure_installed({
       'tsserver',
       'eslint',
       'pyright',
       'prismals',
+      'lua_ls',
+      'jsonls',
+    })
+
+    lsp.configure('lua_ls', {
+      settings = {
+        Lua = {
+          diagnostics = {
+            globals = { 'vim' }
+          },
+        }
+      }
     })
 
     lsp.on_attach(function(client, bufnr)
@@ -37,22 +58,24 @@ return {
         { buffer = bufnr, remap = false, desc = "Format" })
       vim.keymap.set("i", "<C-Space>", function() vim.lsp.buf.signature_help() end,
         { buffer = bufnr, remap = false, desc = "Signature Help" })
+
+      vim.keymap.set("n", "gk", function() vim.lsp.buf.signature_help() end,
+        { buffer = bufnr, remap = false, desc = "Signature Help" })
     end)
 
     lsp.set_preferences({
       sign_icons = {}
     })
 
-
     local cmp_mappings = lsp.defaults.cmp_mappings({
-      ['<CR>'] = cmp.mapping.confirm({
+          ['<CR>'] = cmp.mapping.confirm({
         -- documentation says this is important.
         -- I don't know why.
         behavior = cmp.ConfirmBehavior.Replace,
         select = false,
       }),
-      ['<C-Space>'] = cmp.mapping.complete(),
-      ['<C-e>'] = cmp.mapping.abort(),
+          ['<C-Space>'] = cmp.mapping.complete(),
+          ['<C-e>'] = cmp.mapping.abort(),
     })
 
     -- disable completion with tab
