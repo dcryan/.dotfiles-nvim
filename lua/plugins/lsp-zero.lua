@@ -67,11 +67,19 @@ return {
     lsp.on_attach(function(client, bufnr)
       vim.keymap.set("n", "gf", function() vim.lsp.buf.format { async = true } end,
         { buffer = bufnr, remap = false, desc = "Format" })
-      vim.keymap.set("i", "<C-Space>", function() vim.lsp.buf.signature_help() end,
-        { buffer = bufnr, remap = false, desc = "Signature Help" })
 
-      vim.keymap.set("n", "gk", function() vim.lsp.buf.signature_help() end,
-        { buffer = bufnr, remap = false, desc = "Signature Help" })
+      -- vim.keymap.set("i", "<C-Space>", function() vim.lsp.buf.signature_help() end,
+      --   { buffer = bufnr, remap = false, desc = "Signature Help" })
+      --
+      -- vim.keymap.set("n", "gk", function() vim.lsp.buf.signature_help() end,
+      --   { buffer = bufnr, remap = false, desc = "Signature Help" })
+
+      vim.api.nvim_create_autocmd(
+        "BufWritePre",
+        {
+          pattern = "*.ts,*.tsx,*.js,*.jsx",
+          command = "EslintFixAll",
+        })
     end)
 
     lsp.set_preferences({
@@ -79,14 +87,14 @@ return {
     })
 
     local cmp_mappings = lsp.defaults.cmp_mappings({
-          ['<CR>'] = cmp.mapping.confirm({
+      ['<CR>'] = cmp.mapping.confirm({
         -- documentation says this is important.
         -- I don't know why.
         behavior = cmp.ConfirmBehavior.Replace,
         select = false,
       }),
-          ['<C-Space>'] = cmp.mapping.complete(),
-          ['<C-e>'] = cmp.mapping.abort(),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
     })
 
     -- disable completion with tab
@@ -98,12 +106,5 @@ return {
     })
 
     lsp.setup()
-
-    vim.api.nvim_create_autocmd(
-      "BufWritePre",
-      {
-        pattern = "*.ts,*.tsx,*.js,*.jsx",
-        command = "EslintFixAll",
-      })
   end
 }
