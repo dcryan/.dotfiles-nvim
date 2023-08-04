@@ -7,7 +7,7 @@ return {
   },
   config = {},
   keys = {
-    { "<C-p>",      "<cmd>lua require('telescope.builtin').find_files()<CR>",  desc = "Find files" },
+    { "<C-p>",      "<cmd>lua require('telescope.builtin').find_files({hidden = true})<CR>",  desc = "Find files" },
     { "<leader>f",  "<cmd>lua require('telescope.builtin').live_grep()<CR>",   desc = "Find in files" },
     { "<leader>F",  "<cmd>lua require('telescope.builtin').grep_string()<CR>", desc = "Find in files" },
     -- { "<leader>b",  "<cmd>lua require('telescope.builtin').buffers()<CR>",     desc = "Find buffers" },
