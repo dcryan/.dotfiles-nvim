@@ -41,6 +41,7 @@ return {
       'prismals',
       'lua_ls',
       'jsonls',
+      'tailwindcss',
     })
 
     lsp.configure('lua_ls', {
@@ -51,6 +52,16 @@ return {
           },
         }
       }
+    })
+
+    local root_pattern = require('lspconfig.util').root_pattern
+
+    lsp.configure('tailwindcss', {
+      root_dir = root_pattern(
+        'tailwind.config.js',
+        'tailwind.config.cjs',
+        'tailwind.config.ts'
+      )
     })
 
     lsp.on_attach(function(client, bufnr)
