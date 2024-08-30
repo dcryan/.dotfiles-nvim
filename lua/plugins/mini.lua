@@ -65,4 +65,23 @@ return {
     }
   },
 
+  {
+    'echasnovski/mini.files',
+    version = false,
+    config = function()
+      local miniFiles = require('mini.files')
+
+      vim.keymap.set('n', '<leader>m', function()
+        require('mini.files').open()
+      end, { noremap = true, silent = true, desc = 'Mini Find file' })
+
+      -- vim.keymap.set("n", "gf", function()
+      --   -- vim.lsp.buf.format({ async = true })
+      --   conform.format()
+      --   print("format")
+      -- end, { remap = false, desc = "Format" })
+
+      miniFiles.setup()
+    end,
+  },
 }
