@@ -15,7 +15,7 @@ return {
 			json = { "jsonlint" },
 			jsonc = { "jsonlint" },
 			yaml = { "yamllint" },
-			markdown = { "markdownlint" },
+			markdown = { "markdownlint-cli2" },
 			lua = { "luacheck" },
 			python = { "flake8" },
 			dockerfile = { "hadolint" },
@@ -23,6 +23,7 @@ return {
 			bash = { "shellcheck" },
 			zsh = { "shellcheck" },
 			java = { "checkstyle" },
+			terraform = { "tflint" },
 		},
 	},
 	config = function(_, opts)
