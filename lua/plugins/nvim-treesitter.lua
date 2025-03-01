@@ -2,16 +2,9 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
 	event = { "BufReadPre", "BufNewFile" },
-	-- dependencies = {
-	-- 	"nvim-treesitter/nvim-treesitter-textobjects",
-	-- },
 	opts = {
 		highlight = { enable = true },
 		indent = { enable = true },
-		-- context_commentstring = {
-		--   enable = false,
-		--   enable_autocmd = false,
-		-- },
 		ensure_installed = {
 			"bash",
 			"c",
@@ -29,11 +22,13 @@ return {
 			"tsx",
 			"typescript",
 			"vim",
+			"vimdoc",
 			"yaml",
 			"gitignore",
 			"query",
 			"swift",
 			"kotlin",
+			"terraform",
 		},
 		incremental_selection = {
 			enable = true,
@@ -49,8 +44,3 @@ return {
 		require("nvim-treesitter.configs").setup(opts)
 	end,
 }
-
--- Using Treesitter for folding
--- vim.wo.foldmethod="expr"
--- vim.o.foldexpr="nvim_treesitter#foldexpr()"
--- vim.wo.foldenable=false -- can be enabled directly in opened file - using 'zi' - toogle fold
