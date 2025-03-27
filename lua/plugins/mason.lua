@@ -29,6 +29,7 @@ return {
 				"jsonls",
 				"tailwindcss",
 				"tflint",
+				"yamlls",
 			},
 			automatic_installation = true,
 		},
@@ -48,6 +49,30 @@ return {
 				function(server_name)
 					lspconfig[server_name].setup({
 						capabilities = capabilities,
+					})
+				end,
+				["yamlls"] = function()
+					lspconfig.yamlls.setup({
+						capabilities = capabilities,
+						settings = {
+							yaml = {
+								validate = true,
+								schemaStore = {
+									enable = true,
+								},
+								schemas = {
+									["https://raw.githubusercontent.com/awslabs/goformation/master/schema/cloudformation.schema.json"] = "*.cf.yaml",
+									["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "docker-compose*.yml",
+								},
+								customTags = {
+									"!Ref",
+									"!Sub",
+									"!GetAtt",
+									"!Join",
+									"!Split",
+								},
+							},
+						},
 					})
 				end,
 				["lua_ls"] = function()
