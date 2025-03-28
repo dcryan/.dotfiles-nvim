@@ -9,7 +9,7 @@ return {
 			theme = "tokyonight",
 			section_separators = { left = "", right = "" },
 			component_separators = { left = "", right = "" },
-			disabled_filetypes = { "neo-tree", "Avante", "AvanteSelectedFiles", "AvanteInput" },
+			disabled_filetypes = { "neo-tree", "Avante", "AvanteSelectedFiles", "AvanteInput", "snacks_dashboard" },
 		},
 		-- tabline = {
 		-- 	lualine_a = { "buffers" },
